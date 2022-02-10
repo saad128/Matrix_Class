@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Matrix
 {
-    int numberOfRows;
-    int numberOfCols;
+    public int numberOfRows;
+    public int numberOfCols;
     List<List<float>> matrixDataList;
     //int[,] array ;
 
@@ -23,6 +23,16 @@ public class Matrix
     {
         numberOfRows = row;
         numberOfCols = col;
+        List<List<int>> matrix = new List<List<int>>();
+        for (int i = 0; i < row; i++)
+        {
+            matrix.Add(new List<int>());
+            for (int j = 0; j < col; j++)
+            {
+                matrix[i].Add(0);
+            }
+        }
+
     }
 
     public void ArrayToList(int[,] array)
@@ -140,6 +150,7 @@ public class Matrix
                 matrixDataList[i].Add(num);
             }
         }
+        OnMatrixUpdate();
     }
 
     public void SetRow(int rowNum, int num)
@@ -150,6 +161,7 @@ public class Matrix
             {
                 matrixDataList[rowNum][i] = num;
             }
+            OnMatrixUpdate();
         }
         else
         {
@@ -165,6 +177,7 @@ public class Matrix
             {
                 matrixDataList[i][colNum] = num;
             }
+            OnMatrixUpdate();
         }
         else
         {
@@ -185,6 +198,7 @@ public class Matrix
                 matrixDataList[i][j] = num;
             }
         }
+        OnMatrixUpdate();
     }
 
     public void SetInverseDiagonal(int num)
@@ -198,6 +212,7 @@ public class Matrix
                 matrixDataList[i][j] = num;
             }
         }
+        OnMatrixUpdate();
     }
 
     public float[] GetRow(int rowNum) 
@@ -269,4 +284,6 @@ public class Matrix
             Debug.Log("Column Swaping is not possible");
         }
     }
+
+    public virtual void OnMatrixUpdate() { }
 }
